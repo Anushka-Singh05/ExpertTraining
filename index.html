@@ -442,14 +442,18 @@
       transition: background .35s ease, transform .35s var(--spring);
     }
     .journey-icon-box i { color:var(--purple-mid); font-size:2.5rem; transition: color .3s ease; }
-
+/* Journey layout — desktop: flex row, mobile: stack */
     .journey-wrapper {
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:0;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      gap: 0;
     }
-    .journey-item { width:400px; flex:none; }
+    .journey-item {
+      flex: 1 1 0;
+      max-width: 400px;
+      min-width: 0;
+    }
     .journey-connector {
   width: 60px;
   position: relative;
@@ -507,6 +511,13 @@
 .journey-item.reveal:nth-child(1).active { transition-delay: 0.05s; }
 .journey-item.reveal:nth-child(3).active { transition-delay: 0.15s; }
 .journey-item.reveal:nth-child(5).active { transition-delay: 0.25s; }
+.journey-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap; /* IMPORTANT for responsiveness */
+}
 
     /* ── MENTORS ── */
     .mentor-card {
@@ -697,33 +708,241 @@
     .nl-btn i { color:#fff; font-size:1rem; }
     .nl-btn:hover { background:var(--purple-dark) !important; transform:scale(1.1); }
 
-    /* ── RESPONSIVE ── */
-    @media(max-width:991.98px){
-      .hero-heading { font-size:38px !important; text-align:center; }
-      .col-lg-5 { text-align:center; }
-      .col-lg-5 .d-flex.flex-wrap { justify-content:center; }
-      .col-lg-5 .d-flex.align-items-center { justify-content:center; }
-      .hero-img-box { min-height:auto !important; }
-      .hero-main-img { height:auto !important; }
-      .stats-card { position:relative !important; top:auto !important; right:auto !important; width:90% !important; margin:20px auto; }
-      section { margin-top:60px !important; }
-      h2 { font-size:36px !important; }
-      footer .row>div { text-align:center; }
-      footer .d-flex.gap-3 { justify-content:center; }
-    }
-    @media(max-width:767.98px){
-      .hero-heading { font-size:32px !important; line-height:1.3 !important; }
-      h2 { font-size:28px !important; }
-      .hero-blob { width:200px !important; height:200px !important; left:50% !important; transform:translateX(-50%); }
-      .hero-main-img { height:350px !important; object-fit:contain !important; }
-      .mentor-img { width:90px !important; height:90px !important; }
-    }
-    @media(max-width:480px){
-      .hero-heading { font-size:28px !important; }
-      h2 { font-size:24px !important; }
-      .brand-logo { font-size:1.5rem !important; }
-    }
-  </style>
+/* =========================
+   GLOBAL ROCKET BANNER BASE
+========================= */
+.rocket-banner {
+  width: min(92%, 980px);
+  margin: 0 auto;
+}
+
+/* =========================
+   HERO + TYPOGRAPHY
+========================= */
+@media (max-width: 991.98px) {
+  .hero-heading { font-size: 38px !important; text-align: center; }
+  h2 { font-size: 36px !important; }
+  section { margin-top: 60px !important; }
+
+  .col-lg-5,
+  footer .row > div { text-align: center; }
+
+  .col-lg-5 .d-flex.flex-wrap,
+  .col-lg-5 .d-flex.align-items-center,
+  footer .d-flex.gap-3 {
+    justify-content: center;
+  }
+
+  .hero-img-box { min-height: auto !important; }
+  .hero-main-img { height: auto !important; }
+
+  .stats-card {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    width: 90% !important;
+    margin: 20px auto;
+  }
+
+  .mentor-indicators { display: none !important; }
+
+  .mentor-card {
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+  }
+
+  .mentor-card img { flex-shrink: 0; }
+
+  .mentor-card div { min-width: 0; }
+
+  .mentor-card p {
+    white-space: normal !important;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* =========================
+   MOBILE (small screens)
+========================= */
+@media (max-width: 767.98px) {
+  .hero-heading { font-size: 32px !important; line-height: 1.3 !important; }
+  h2 { font-size: 28px !important; }
+
+  .hero-blob {
+    width: 200px !important;
+    height: 200px !important;
+    left: 50% !important;
+    transform: translateX(-50%);
+  }
+
+  .hero-main-img {
+    height: 350px !important;
+    object-fit: contain !important;
+  }
+
+  .mentor-img { width: 90px !important; height: 90px !important; }
+
+  .mentor-carousel .carousel-item .col-lg-4 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  .mentor-carousel .carousel-item .col-lg-4:not(:first-child) {
+    display: none !important;
+  }
+}
+
+/* =========================
+   VERY SMALL DEVICES
+========================= */
+@media (max-width: 480px) {
+  .hero-heading { font-size: 28px !important; }
+  h2 { font-size: 24px !important; }
+  .brand-logo { font-size: 1.5rem !important; }
+}
+
+/* =========================
+   TABLET CAROUSEL
+========================= */
+@media (max-width: 1400px) and (min-width: 768px) {
+  .mentor-carousel .carousel-item .col-lg-4 {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+  }
+
+  .mentor-carousel .carousel-item .col-lg-4:nth-child(n+3) {
+    display: none !important;
+  }
+}
+
+/* =========================
+   JOURNEY SECTION
+========================= */
+@media (max-width: 999px) {
+  .journey-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    padding: 20px 0;
+  }
+
+  .journey-item {
+    width: 100%;
+    max-width: 520px;
+  }
+
+  .journey-connector { display: none; }
+}
+
+/* mid-size tuning */
+@media (min-width: 1000px) and (max-width: 1200px) {
+  .journey-item { flex: 0 0 260px; max-width: 260px; }
+
+  .journey-card { padding: 1rem !important; }
+
+  .journey-card h4 { font-size: 17px !important; }
+  .journey-card p { font-size: 13.5px !important; }
+
+  .journey-icon-box { width: 65px; height: 65px; }
+
+  .journey-wrapper { gap: 12px; }
+  .journey-connector { width: 35px; }
+}
+
+/* =========================
+   PROGRAMS SECTION
+========================= */
+@media (min-width: 1000px) and (max-width: 1300px) {
+  .programs-section .row > div {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+  }
+
+  .programs-section .row { justify-content: center; }
+
+  .programs-section .enterprise-card h5 {
+    margin-top: 40px;
+    font-size: 30px;
+  }
+
+  .btn-cta-yellow,
+  .btn-cta-ghost {
+    font-size: 16px !important;
+    padding: 7px 14px !important;
+  }
+}
+
+/* =========================
+   BUTTONS (MOBILE SCALE)
+========================= */
+@media (max-width: 1000px) {
+  .btn-cta-yellow,
+  .btn-cta-ghost {
+    padding: 7px 14px !important;
+    border-radius: 8px !important;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 400px) {
+  .btn-cta-yellow,
+  .btn-cta-ghost { font-size: 14px !important; }
+}
+
+@media (min-width: 400px) and (max-width: 700px) {
+  .btn-cta-yellow,
+  .btn-cta-ghost { font-size: 16px !important; }
+}
+
+@media (min-width: 700px) and (max-width: 1000px) {
+  .btn-cta-yellow,
+  .btn-cta-ghost { font-size: 20px !important; }
+}
+
+/* =========================
+   ROCKET BANNER RESPONSIVE
+========================= */
+@media (max-width: 900px) {
+  .rocket-banner {
+    background-position: right center;
+    background-size: cover;
+  }
+}
+
+@media (max-width: 800px) {
+  .rocket-banner {
+    min-height: 160px;
+  }
+}
+
+@media (min-width: 800px) and (max-width: 950px) {
+  .rocket-banner {
+    width: 92% !important;
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 700px) and (max-width: 750px) {
+  .rocket-banner {
+    width: 75%;
+    max-width: 500px;
+    background-position: 85% center;
+  }
+}
+
+@media (min-width: 750px) and (max-width: 991px) {
+  .rocket-banner {
+    width: 100%;
+    max-width: 900px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .rocket-banner {
+    max-width: 1360px;
+  }
+}
+</style>
 </head>
 <body>
 
@@ -812,7 +1031,7 @@
   </section>
 
   <!-- ── PROGRAMS ── -->
-  <section class="mt-5">
+  <section class="mt-5 programs-section">
     <div class="container">
       <div class="text-center mb-5 reveal">
         <h2 class="fw-bold" style="font-size:42px;color:var(--dark)">Industry-Focused Learning Programs</h2>
@@ -1030,7 +1249,7 @@
         <p class="mx-auto" style="max-width:650px;color:var(--muted);font-size:20px">Learn from accomplished leaders, innovators, and industry veterans who have built and scaled successful organizations across the globe.</p>
       </div>
 
-      <div id="mentorCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+      <div id="mentorCarousel" class="carousel slide mentor-carousel" data-bs-ride="carousel" data-bs-interval="3000">
         <div class="carousel-inner">
 
           <!-- Slide 1 -->
@@ -1198,7 +1417,7 @@
           </div>
           <div class="col-lg-4 text-white">
             <h2 class="fw-bold" style="font-size:34px;line-height:1.15;margin-left:40px;">Flexible Learning Plans</h2>
-            <p class="mt-4 fw-semibold" style="color:rgba(255,255,255,.85);font-size:18px;line-height:1.9;max-width:300;margin-left:40px;">Upskill with Industry-Focused Programs Designed for Ambitious Professionals <br>Ready to Grow with Expert Guidance.</p>
+            <p class="mt-4 fw-semibold" style="color:rgba(255,255,255,.85);font-size:18px;line-height:1.9;max-width:300;margin-left:40px;">Upskill with Industry-Focused Programs <br>Designed for Ambitious Professionals <br>Ready to Grow with Expert Guidance.</p>
             <div class="mt-5 d-flex gap-3" style="margin-left:30px;">
               <a href="#" class="btn btn-cta-yellow">Apply Now <i class="bi bi-arrow-right ms-2"></i></a>
               <a href="#" class="btn btn-cta-ghost">Talk to an Advisor</a>
