@@ -473,6 +473,29 @@
     @media (max-width:991.98px){
       .journey-wrapper { flex-direction:column; }
     }
+    .reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* when visible */
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* optional nicer feel for cards */
+.journey-item.reveal {
+  transform: translateY(40px);
+}
+.journey-item.reveal {
+  transition-delay: 0s;
+}
+
+.journey-item.reveal:nth-child(1).active { transition-delay: 0.05s; }
+.journey-item.reveal:nth-child(3).active { transition-delay: 0.15s; }
+.journey-item.reveal:nth-child(5).active { transition-delay: 0.25s; }
 
     /* ── MENTORS ── */
     .mentor-card {
@@ -531,6 +554,38 @@
     .social-btn i { font-size:20px; }
     .social-btn:hover { background:#6d63ff; color:#fff; transform:translateY(-3px); }
     .carousel-item { padding-top:15px; padding-bottom:15px; }
+    .mentor-section .reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mentor-section .reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+.mentor-card {
+  opacity: 0;
+  transform: translateY(25px) scale(0.98);
+  transition: all 0.6s ease;
+}
+
+/* when section becomes active */
+.mentor-section .reveal.active .mentor-card {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.mentor-card {
+  opacity: 0;
+  transform: translateY(25px) scale(0.98);
+  transition: all 0.6s ease;
+}
+
+/* when section becomes active */
+.mentor-section .reveal.active .mentor-card {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
 
     /* ── FLEXIBLE LEARNING CTA ── */
     .flex-cta-wrap {
@@ -956,8 +1011,8 @@
   </section>
 
   <!-- ── MENTORS ── -->
-  <section class="mt-5">
-    <div class="container">
+  <section class="mt-5 mentor-section">
+    <div class="container reveal">
       <div class="text-center mb-5 reveal">
         <span class="badge rounded-pill px-4 py-2" style="background:#ede9fe;color:#6d63ff;font-weight:600;letter-spacing:.5px;font-size:18px;">INDUSTRY EXPERTS</span>
         <h2 class="fw-bold mt-4" style="font-size:48px;color:#111827">Meet the <span style="color:#6d63ff">Master Mentors</span></h2>
@@ -1263,6 +1318,22 @@
       document.querySelectorAll('.mentor-indicators button').forEach(btn => btn.classList.remove('active'));
       document.querySelector(`.mentor-indicators button[data-bs-slide-to="${e.to}"]`).classList.add('active');
     });
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("active");
+      observer.unobserve(entry.target);
+    }
+  });
+}, {
+  threshold: 0.15
+});
+
+document.querySelectorAll(".reveal").forEach(el => {
+  observer.observe(el);
+});
+
 
     if (history.scrollRestoration) history.scrollRestoration = 'manual';
     window.scrollTo({ top: 0, behavior: 'instant' });
