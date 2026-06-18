@@ -712,7 +712,14 @@
    GLOBAL ROCKET BANNER BASE
 ========================= */
 .rocket-banner {
-  width: min(92%, 980px);
+  width: 100%;
+  max-width: 100%;
+  border-radius: 32px;
+  min-height: 200px;
+}
+.rocket-banner {
+  width: 100%;
+  max-width: 1320px;
   margin: 0 auto;
 }
 
@@ -886,7 +893,7 @@
 
 @media (min-width: 300px) and (max-width: 400px) {
   .btn-cta-yellow,
-  .btn-cta-ghost { font-size: 14px !important; }
+  .btn-cta-ghost { font-size: 13px !important; }
 }
 
 @media (min-width: 400px) and (max-width: 700px) {
@@ -902,44 +909,59 @@
 /* =========================
    ROCKET BANNER RESPONSIVE
 ========================= */
-@media (max-width: 900px) {
+@media (max-width: 550px) {
+  .rocket-banner {
+    background-position: center;
+    background-size: cover;
+  }
+}
+@media (min-width:500) and (max-width: 800px) {
   .rocket-banner {
     background-position: right center;
     background-size: cover;
   }
 }
 
-@media (max-width: 800px) {
-  .rocket-banner {
-    min-height: 160px;
-  }
+/* =========================
+   CLIPBOARD IMAGE SIZE FIX
+========================= */
+.clipboard-img{
+  max-width:120%;
+  height:auto;
 }
 
-@media (min-width: 800px) and (max-width: 950px) {
-  .rocket-banner {
-    width: 92% !important;
-    max-width: 720px;
+@media (max-width:500px){
+  .clipboard-img{
+    display:block;
+    margin:0 auto;
+    width:90%; /* adjust as needed */
+    max-width:90%;
   }
 }
+/* =========================
+   FEATURE CARD FONT SIZE FIX
+========================= */
+@media (min-width:300px) and (max-width:400px){
 
-@media (min-width: 700px) and (max-width: 750px) {
-  .rocket-banner {
-    width: 75%;
-    max-width: 500px;
-    background-position: 85% center;
+  .features-card h3{
+    font-size:22px !important;
+  }
+  .features-card .semi-bold{
+    font-size:16px !important;
+  }
+  .features-card .feature-item span{
+    font-size:14px !important;
+  }
+  .features-card small{
+    font-size:12px !important;
   }
 }
-
-@media (min-width: 750px) and (max-width: 991px) {
+@media (max-width: 420px) {
   .rocket-banner {
-    width: 100%;
-    max-width: 900px;
+    min-height: 260px !important;
   }
-}
-
-@media (min-width: 1200px) {
-  .rocket-banner {
-    max-width: 1360px;
+  .rocket-banner .row{
+    padding-top:30px !important;
   }
 }
 </style>
@@ -1092,7 +1114,7 @@
           <div class="enterprise-card p-4 py-4">
             <h5 class="fw-semibold mb-3">Enterprise Learning Solutions</h5>
             <p>Customized corporate training programs designed for growing teams, enterprises, and professionals looking to upskill in high-demand domains.</p>
-            <button class="btn btn-light mt-3 p-2 fw-semibold" style="color:var(--purple)">Book Consultation</button>
+            <button class="btn btn-light mt-3 p-2 fw-semibold" style="color:var(--purple); font-size:15px;">Book Consultation</button>
           </div>
         </div>
 
@@ -1413,7 +1435,7 @@
       <div class="flex-cta-wrap p-3 p-lg-4">
         <div class="row align-items-center g-4">
           <div class="col-lg-3 text-center">
-            <img src="clipboard.png" alt="Clipboard" style="max-width:120%;height:auto"/>
+            <img src="clipboard.png" alt="Clipboard"class="clipboard-img" style="max-width:120%;height:auto"/>
           </div>
           <div class="col-lg-4 text-white">
             <h2 class="fw-bold" style="font-size:34px;line-height:1.15;margin-left:40px;">Flexible Learning Plans</h2>
@@ -1463,7 +1485,7 @@
 
   <!-- ── ROCKET CTA ── -->
   <section class="mt-4" style="padding-bottom:60px;background:transparent">
-    <div class="container" style="max-width:1400px">
+    <div class="container">
       <div class="rocket-banner reveal-s">
         <div class="row align-items-center justify-content-center h-100 text-center" style="min-height:200px">
           <div class="col-lg-7">
